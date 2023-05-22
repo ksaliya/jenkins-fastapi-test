@@ -12,9 +12,15 @@ pipeline {
       }
     }
 
-    stage('Node Test') {
+    stage('Build Docker Image') {
       steps {
-        sh 'echo "in the node"'
+        sh 'docker build -t my-api:0.0.2 .'
+      }
+    }
+
+    stage('Deploy API') {
+      steps {
+        sh 'docker run -d --name api-container -p 8081:80 my-api:0.0.2'
       }
     }
 
