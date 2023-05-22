@@ -33,5 +33,11 @@ fi'''
       }
     }
 
+    stage('Validate') {
+      steps {
+        sh 'curl localhost:8081'
+      }
+    }
+
   }
 }
