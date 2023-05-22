@@ -12,5 +12,11 @@ pipeline {
       }
     }
 
+    stage('Node Test') {
+      steps {
+        sh 'echo "in the node"'
+      }
+    }
+
   }
 }
