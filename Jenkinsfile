@@ -24,7 +24,6 @@ pipeline {
   docker stop api-container
   docker rm api-container
 fi'''
-        sh 'docker rm api-container'
       }
     }
 
