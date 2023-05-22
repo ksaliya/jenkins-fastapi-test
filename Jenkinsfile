@@ -20,14 +20,17 @@ pipeline {
 
     stage('Remove Old Container') {
       steps {
-        sh 'docker stop api-container'
+        sh '''if docker ps -a --format \'{{.Names}}\' | grep -q \'api-container\'; then
+  docker stop api-container
+  docker rm api-container
+fi'''
         sh 'docker rm api-container'
       }
     }
-    
+
     stage('Deploy API') {
       steps {
-        sh 'docker run -d --name api-container -p 8081:80 my-api:0.0.my-api:0.0.${BUILD_ID}'
+        sh 'docker run -d --name api-container -p 8081:80 my-api:0.0.${BUILD_ID}'
       }
     }
 
