@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'andromeda-node'
+      label 'andromeda'
     }
 
   }
