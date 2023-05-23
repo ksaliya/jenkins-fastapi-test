@@ -14,24 +14,8 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t my-api:0.0.${BUILD_ID} .'
+        sh 'docker compose up -d --build'
       }
     }
-
-    stage('Remove Old Container') {
-      steps {
-        sh '''if docker ps -a --format \'{{.Names}}\' | grep -q \'api-container\'; then
-  docker stop api-container
-  docker rm api-container
-fi'''
-      }
-    }
-
-    stage('Deploy API') {
-      steps {
-        sh 'docker run -d --name api-container -p 8081:80 my-api:0.0.${BUILD_ID}'
-      }
-    }
-
   }
 }
